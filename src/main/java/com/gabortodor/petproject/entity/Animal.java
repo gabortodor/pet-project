@@ -7,12 +7,14 @@ import lombok.*;
 import org.hibernate.envers.Audited;
 
 import java.time.Instant;
+import java.util.Set;
 
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Audited
 @Entity(name = "animal")
 public class Animal extends BaseEntity{
@@ -51,4 +53,12 @@ public class Animal extends BaseEntity{
 
     @Column(name = "description")
     private String description;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "animal_local_file",
+            joinColumns = @JoinColumn(name = "animal_id"),
+            inverseJoinColumns = @JoinColumn(name = "local_file_id")
+    )
+    private Set<LocalFile> files;
 }

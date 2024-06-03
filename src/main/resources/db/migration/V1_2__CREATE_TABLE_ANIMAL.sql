@@ -33,7 +33,6 @@ CREATE TABLE animal_aud(
     description TEXT,
     created_at TIMESTAMP NOT NULL,
     last_modified_at TIMESTAMP NOT NULL,
-    PRIMARY KEY (id, rev)
+    PRIMARY KEY (id, rev),
+    CONSTRAINT fk_animal_aud_rev FOREIGN KEY (rev) REFERENCES revinfo
 );
-
-ALTER TABLE animal_aud ADD CONSTRAINT animal_aud_rev_fk FOREIGN KEY (rev) REFERENCES revinfo;

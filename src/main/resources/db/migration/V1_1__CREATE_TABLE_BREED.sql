@@ -14,7 +14,6 @@ CREATE TABLE breed_aud(
     name VARCHAR,
     created_at TIMESTAMP,
     last_modified_at TIMESTAMP,
-    PRIMARY KEY (id, rev)
+    PRIMARY KEY (id, rev),
+    CONSTRAINT fk_breed_aud_rev FOREIGN KEY (rev) REFERENCES revinfo
 );
-
-ALTER TABLE breed_aud ADD CONSTRAINT breed_aud_rev_fk FOREIGN KEY (rev) REFERENCES revinfo;
