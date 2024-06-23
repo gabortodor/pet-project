@@ -10,4 +10,7 @@ public class LocalFileDTO extends BaseDTO {
 
     @NotBlank
     private String path;
+
+    private String hashHex;
+
 }

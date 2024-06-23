@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/v1/animal")
-public class AnimalController extends BaseController<Animal, AnimalDTO, AnimalRepository, AnimalService> {
+public class AnimalController extends BaseControllerWithLocalFile<Animal, AnimalDTO, AnimalRepository, AnimalService> {
 
     @Autowired
     public AnimalController(AnimalService service) {

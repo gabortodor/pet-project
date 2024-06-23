@@ -17,7 +17,7 @@ import java.util.Set;
 @Builder
 @Audited
 @Entity(name = "animal")
-public class Animal extends BaseEntity{
+public class Animal extends BaseEntityWithLocalFile {
     @Column(name = "type")
     @Enumerated(EnumType.STRING)
     private AnimalType type;
@@ -60,5 +60,5 @@ public class Animal extends BaseEntity{
             joinColumns = @JoinColumn(name = "animal_id"),
             inverseJoinColumns = @JoinColumn(name = "local_file_id")
     )
-    private Set<LocalFile> files;
+    private Set<LocalFile> localFiles;
 }

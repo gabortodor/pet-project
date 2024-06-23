@@ -1,7 +1,6 @@
 package com.gabortodor.petproject.dto;
 
-import com.gabortodor.petproject.entity.Breed;
-import com.gabortodor.petproject.entity.LocalFile;
+import com.gabortodor.petproject.entity.BaseEntityWithLocalFile;
 import com.gabortodor.petproject.entity.constant.AnimalGender;
 import com.gabortodor.petproject.entity.constant.AnimalType;
 import jakarta.validation.Valid;
@@ -12,11 +11,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.Instant;
-import java.util.Set;
 
 @Getter
 @Setter
-public class AnimalDTO extends BaseDTO {
+public class AnimalDTO extends BaseDTOWithLocalFile {
 
     @NotNull
     private AnimalType type;
@@ -35,7 +33,7 @@ public class AnimalDTO extends BaseDTO {
 
     @NotNull
     @Valid
-    private BreedDTO breed; //TODO
+    private BreedDTO breed;
 
     private String color;
 
@@ -46,7 +44,4 @@ public class AnimalDTO extends BaseDTO {
     private Boolean chipped;
 
     private String description;
-
-    @Valid
-    private Set<LocalFileDTO> files; //TODO
 }

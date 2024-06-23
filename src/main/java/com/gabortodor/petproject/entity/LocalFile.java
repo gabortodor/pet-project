@@ -16,4 +16,7 @@ public class LocalFile extends BaseEntity {
 
     @Column(name = "path")
     private String path;
+
+    @Column(name = "hash_hex")
+    private String hashHex;
 }

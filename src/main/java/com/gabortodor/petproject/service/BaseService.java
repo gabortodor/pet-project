@@ -19,8 +19,8 @@ public abstract class BaseService<E extends BaseEntity, D extends BaseDTO, R ext
 
     protected R repository;
 
-    private final Class<E> entityClass;
-    private final Class<D> dtoClass;
+    protected final Class<E> entityClass;
+    protected final Class<D> dtoClass;
 
     protected BaseService(Class<E> entityClass, Class<D> dtoClass, R repository) {
         this.entityClass = entityClass;

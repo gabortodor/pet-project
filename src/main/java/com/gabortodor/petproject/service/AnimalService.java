@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class AnimalService extends BaseService<Animal, AnimalDTO, AnimalRepository>{
+public class AnimalService extends BaseServiceWithLocalFile<Animal, AnimalDTO, AnimalRepository>{
 
     @Autowired
     public AnimalService(AnimalRepository animalRepository) {

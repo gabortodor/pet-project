@@ -11,9 +11,11 @@ CREATE TABLE animal(
     body_size VARCHAR,
     is_chipped BOOL,
     description TEXT,
+    featured_local_file_id UUID,
     created_at TIMESTAMP NOT NULL,
     last_modified_at TIMESTAMP NOT NULL,
-    CONSTRAINT fk_breed FOREIGN KEY(breed_id) REFERENCES breed(id)
+    CONSTRAINT fk_breed FOREIGN KEY(breed_id) REFERENCES breed(id),
+    CONSTRAINT fk_featured_local_file FOREIGN KEY(featured_local_file_id) REFERENCES local_file(id),
 );
 
 CREATE TABLE animal_aud(
@@ -31,6 +33,7 @@ CREATE TABLE animal_aud(
     body_size VARCHAR,
     is_chipped BOOL,
     description TEXT,
+    featured_local_file_id UUID,
     created_at TIMESTAMP NOT NULL,
     last_modified_at TIMESTAMP NOT NULL,
     PRIMARY KEY (id, rev),
