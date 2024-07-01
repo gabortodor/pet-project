@@ -1,5 +1,8 @@
 package com.gabortodor.petproject.entity.constant;
 
+/**
+ * Enumeration representing the gender of an animal.
+ */
 public enum AnimalGender {
     MALE,
     FEMALE,

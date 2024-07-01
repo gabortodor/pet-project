@@ -17,6 +17,9 @@ import java.io.IOException;
 import java.net.URLConnection;
 import java.util.UUID;
 
+/**
+ * Controller class for managing {@link LocalFile} entities via REST API endpoints.
+ */
 @RestController
 @RequestMapping("/api/v1/local-file")
 public class LocalFileController extends BaseController<LocalFile, LocalFileDTO, LocalFileRepository, LocalFileService> {
@@ -26,6 +29,13 @@ public class LocalFileController extends BaseController<LocalFile, LocalFileDTO,
         super(LocalFile.class, LocalFileDTO.class, localFileService);
     }
 
+    /**
+     * Endpoint for downloading a local file by its {@link UUID}.
+     *
+     * @param uuid the {@link UUID} of the local file to download
+     * @return {@link ResponseEntity} containing the file as a Resource
+     * @throws IOException if an error occurs during file download
+     */
     @GetMapping("/download/{uuid}")
     public ResponseEntity<Resource> download(@PathVariable UUID uuid) throws IOException {
         Resource resource = service.downloadLocalFile(uuid);
@@ -36,6 +46,12 @@ public class LocalFileController extends BaseController<LocalFile, LocalFileDTO,
                 .body(resource);
     }
 
+    /**
+     * Determines the {@link MediaType} based on the filename for file downloading.
+     *
+     * @param filename the name of the file
+     * @return the {@link MediaType} of the file
+     */
     private MediaType getMediaTypeFromFileName(String filename) {
         return MediaType.parseMediaType(URLConnection.guessContentTypeFromName(filename));
     }

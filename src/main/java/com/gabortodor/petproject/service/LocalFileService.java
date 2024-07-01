@@ -24,8 +24,11 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Optional;
 import java.util.UUID;
 
-@Service
+/**
+ * Service class for managing {@link LocalFile} entities.
+ */
 @Log4j2
+@Service
 public class LocalFileService extends BaseService<LocalFile, LocalFileDTO, LocalFileRepository> {
 
     @Value("${pet_project.uploads.directory}")
@@ -36,6 +39,12 @@ public class LocalFileService extends BaseService<LocalFile, LocalFileDTO, Local
         super(LocalFile.class, LocalFileDTO.class, repository);
     }
 
+    /**
+     * Uploads a local file and saves its information to the database.
+     *
+     * @param multipartFile the file to upload
+     * @return the uploaded {@link LocalFile} entity
+     */
     public LocalFile uploadLocalFile(MultipartFile multipartFile) {
         if (multipartFile.isEmpty()) {
             //TODO exception
@@ -62,6 +71,12 @@ public class LocalFileService extends BaseService<LocalFile, LocalFileDTO, Local
         }
     }
 
+    /**
+     * Downloads a local file by its {@link UUID}.
+     *
+     * @param uuid the {@link UUID} of the local file
+     * @return the file as a {@link Resource}
+     */
     public Resource downloadLocalFile(UUID uuid) {
         LocalFile localFile = repository.findById(uuid).orElseThrow(() -> new ResourceNotFoundException(entityClass, "id", uuid.toString()));
 
@@ -80,6 +95,12 @@ public class LocalFileService extends BaseService<LocalFile, LocalFileDTO, Local
         }
     }
 
+    /**
+     * Generates a hash from a byte array using SHA-256.
+     *
+     * @param bytes the byte array to hash
+     * @return the generated hash as a hexadecimal string
+     */
     public static String getHashFromBytes(byte[] bytes) {
         try {
             MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
@@ -91,6 +112,12 @@ public class LocalFileService extends BaseService<LocalFile, LocalFileDTO, Local
         }
     }
 
+    /**
+     * Converts a byte array to a hexadecimal string.
+     *
+     * @param hashBytes the byte array to convert
+     * @return the hexadecimal string representation of the byte array
+     */
     private static String toHexString(byte[] hashBytes) {
         BigInteger number = new BigInteger(1, hashBytes);
         return StringUtils.leftPad(number.toString(16), 32, '0');
