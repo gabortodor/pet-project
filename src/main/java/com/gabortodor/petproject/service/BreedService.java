@@ -6,6 +6,9 @@ import com.gabortodor.petproject.repository.BreedRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * Service class for managing {@link Breed} entities.
+ */
 @Service
 public class BreedService extends BaseService<Breed, BreedDTO, BreedRepository> {
 

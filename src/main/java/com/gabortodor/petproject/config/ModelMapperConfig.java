@@ -4,9 +4,17 @@ import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * Configuration class for providing a {@link ModelMapper} bean.
+ */
 @Configuration
 public class ModelMapperConfig {
 
+    /**
+     * Creates and returns a {@link ModelMapper} instance.
+     *
+     * @return {@link ModelMapper} instance
+     */
     @Bean
     public ModelMapper modelMapper() {
         return new ModelMapper();
