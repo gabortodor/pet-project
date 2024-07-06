@@ -1,0 +1,43 @@
+version: '3.9'
+
+name: pet-project
+
+services:
+  postgres:
+    image: postgres:16.3
+    container_name: postgres
+    networks:
+      - pet-project
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./postgres-init:/docker-entrypoint-initdb.d
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:25.0.0
+    container_name: keycloak
+    networks:
+      - pet-project
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    environment:
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+      - KC_DB=postgres
+      - KC_DB_URL=jdbc:postgresql://pet-project-postgres:5432/keycloak
+      - KC_DB_USERNAME=postgres
+      - KC_DB_PASSWORD=postgres
+    command: start-dev
+
+networks:
+  pet-project:
+    external: true
+
+volumes:
+  postgres_data:

@@ -15,7 +15,7 @@ CREATE TABLE animal(
     created_at TIMESTAMP NOT NULL,
     last_modified_at TIMESTAMP NOT NULL,
     CONSTRAINT fk_breed FOREIGN KEY(breed_id) REFERENCES breed(id),
-    CONSTRAINT fk_featured_local_file FOREIGN KEY(featured_local_file_id) REFERENCES local_file(id),
+    CONSTRAINT fk_featured_local_file FOREIGN KEY(featured_local_file_id) REFERENCES local_file(id)
 );
 
 CREATE TABLE animal_aud(
@@ -38,4 +38,20 @@ CREATE TABLE animal_aud(
     last_modified_at TIMESTAMP NOT NULL,
     PRIMARY KEY (id, rev),
     CONSTRAINT fk_animal_aud_rev FOREIGN KEY (rev) REFERENCES revinfo
+);
+
+CREATE TABLE animal_local_file(
+    animal_id UUID NOT NULL,
+    local_file_id UUID NOT NULL,
+    CONSTRAINT fk_animal FOREIGN KEY(animal_id) REFERENCES animal(id),
+    CONSTRAINT fk_local_file FOREIGN KEY(local_file_id) REFERENCES local_file(id)
+);
+
+CREATE TABLE animal_local_file_aud(
+    animal_id UUID NOT NULL,
+    local_file_id UUID NOT NULL,
+    rev INTEGER NOT NULL,
+    revtype SMALLINT,
+    PRIMARY KEY (animal_id, local_file_id, rev),
+    CONSTRAINT fk_animal_local_file_aud_rev FOREIGN KEY (rev) REFERENCES revinfo
 );
