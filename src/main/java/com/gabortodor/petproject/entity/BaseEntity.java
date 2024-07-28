@@ -5,7 +5,9 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.envers.Audited;
+import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -41,9 +43,23 @@ public class BaseEntity implements Serializable {
     private Instant createdAt;
 
     /**
+     * UUID of the user, who created the entity.
+     */
+    @Column(name = "created_by", nullable = false, updatable = false)
+    @CreatedBy
+    private UUID createdBy;
+
+    /**
      * Timestamp when the entity was last modified.
      */
     @Column(name = "last_modified_at")
     @LastModifiedDate
     private Instant lastModifiedAt;
+
+    /**
+     * UUID of the user, who last modified the entity.
+     */
+    @Column(name = "last_modified_by", nullable = false, updatable = false)
+    @LastModifiedBy
+    private UUID lastModifiedBy;
 }
